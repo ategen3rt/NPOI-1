@@ -548,13 +548,9 @@ namespace NPOI.XSSF.Streaming
             var tmplFile = TempFile.CreateTempFile("poi-sxssf-template", ".xlsx");
             try
             {
-                var os = new FileStream(tmplFile.FullName, FileMode.Open, FileAccess.ReadWrite);
-                try
-                {
+                using (var os = new FileStream(tmplFile.FullName, FileMode.Open, FileAccess.ReadWrite))
+                { 
                     XssfWorkbook.Write(os);
-                }
-                finally
-                {
                     os.Close();
                 }
 

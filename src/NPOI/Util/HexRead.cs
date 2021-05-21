@@ -43,14 +43,9 @@ namespace NPOI.Util
         /// <exception cref="IOException">If there was a problem while reading the file.</exception>
         public static byte[] ReadData( String filename )
         {
-            FileStream stream = new FileStream(filename,FileMode.Open,FileAccess.Read);
-            try
+            using (FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
-                return ReadData( stream, -1 );
-            }
-            finally
-            {
-                stream.Close();
+                return ReadData(stream, -1);
             }
         }
 

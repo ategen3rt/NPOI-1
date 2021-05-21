@@ -248,19 +248,22 @@ namespace NPOI.SS.Converter
         }
         public static HSSFWorkbook LoadXls(string xlsFile)
         {
-            FileStream inputStream = File.Open(xlsFile, FileMode.Open);
-            //FileInputStream inputStream = new FileInputStream( xlsFile );
-            try
+            using (FileStream inputStream = File.Open(xlsFile, FileMode.Open))
             {
                 return new HSSFWorkbook(inputStream);
             }
-            finally
-            {
-                if (inputStream != null)
-                    inputStream.Close();
-                inputStream = null;
-                //IOUtils.closeQuietly( inputStream );
-            }
+            //FileInputStream inputStream = new FileInputStream( xlsFile );
+            //try
+            //{
+            //    return new HSSFWorkbook(inputStream);
+            //}
+            //finally
+            //{
+            //    if (inputStream != null)
+            //        inputStream.Close();
+            //    inputStream = null;
+            //    //IOUtils.closeQuietly( inputStream );
+            //}
         }
     }
 

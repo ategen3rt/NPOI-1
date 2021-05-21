@@ -472,8 +472,11 @@ namespace NPOI.OpenXml4Net.OPC
                     PackageRelationshipTypes.THUMBNAIL);
 
             // Copy file data to the newly Created part
-            StreamHelper.CopyStream(new FileStream(path, FileMode.Open), thumbnailPart
-                    .GetOutputStream());
+            using (var inputStream = new FileStream(path, FileMode.Open))
+            {
+                StreamHelper.CopyStream(inputStream, thumbnailPart
+                        .GetOutputStream());
+            }
         }
 
         /**
@@ -1566,23 +1569,30 @@ namespace NPOI.OpenXml4Net.OPC
                 throw new ArgumentException("targetFile");
 
             this.ThrowExceptionIfReadOnly();
-            FileStream fos = null;
-            try
+
+            using (var fos = new FileStream(path, FileMode.OpenOrCreate))
             {
-                fos = new FileStream(path, FileMode.OpenOrCreate);
-            }
-            catch (IOException e)
-            {
-                throw new IOException(e.Message, e);
-            }
-            try
-            {
-                this.Save(fos);
-            }
-            finally
-            {
+                Save(fos);
                 fos.Close();
             }
+
+            //FileStream fos = null;
+            //try
+            //{
+            //    fos = new FileStream(path, FileMode.OpenOrCreate);
+            //}
+            //catch (IOException e)
+            //{
+            //    throw new IOException(e.Message, e);
+            //}
+            //try
+            //{
+            //    this.Save(fos);
+            //}
+            //finally
+            //{
+            //    fos.Close();
+            //}
         }
 
         /**

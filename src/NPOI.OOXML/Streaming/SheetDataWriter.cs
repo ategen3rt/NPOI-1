@@ -85,6 +85,7 @@ namespace NPOI.XSSF.Streaming
             catch (Exception e)
             {
                 fos.Close();
+                fos.Dispose();
                 throw e;
             }
 
@@ -145,6 +146,7 @@ namespace NPOI.XSSF.Streaming
             catch (IOException e)
             {
                 fis.Close();
+                fis.Dispose();
                 throw e;
             }
         }
