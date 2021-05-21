@@ -322,35 +322,31 @@ namespace NPOI.OpenXml4Net.OPC
                 {
                     // Case of a package previously open
 
-                    string tempfilePath=GenerateTempFileName(FileHelper
-                                    .GetDirectory(this.originalPackagePath));
-
-                    FileInfo fi=NPOI.Util.TempFile.CreateTempFile(
-                            tempfilePath, ".tmp");
-
                     // Save the final package to a temporary file
+                    string tempfilePath = Path.GetTempFileName();
                     try
                     {
-                        FileStream fs = File.OpenWrite(fi.FullName);
-                        Save(fs);
-                        if(zipArchive!=null)
-                            this.zipArchive.Close(); // Close the zip archive to be
-                        fs.Close();
+                        using (FileStream fs = File.OpenWrite(tempfilePath))
+                        {
+                            Save(fs);
+                            if (zipArchive != null)
+                                this.zipArchive.Close(); // Close the zip archive to be
+                            fs.Close();
+                        }
                         // able to delete it
-                        FileHelper.CopyFile(fi.FullName, this.originalPackagePath);
+                        FileHelper.CopyFile(tempfilePath, this.originalPackagePath);
                     }
                     finally
                     {
                         // Either the save operation succeed or not, we delete the
                         // temporary file
                         //Fixbug:https://github.com/dotnetcore/NPOI/issues/32
-                        //File.Delete(tempfilePath);
-                        fi.Delete();
+                        File.Delete(tempfilePath);
                         
-                            logger
-                                    .Log(POILogger.WARN, "The temporary file: '"
-                                            + tempfilePath
-                                            + "' cannot be deleted ! Make sure that no other application use it.");
+                            //logger
+                            //        .Log(POILogger.WARN, "The temporary file: '"
+                            //                + tempfilePath
+                            //                + "' cannot be deleted ! Make sure that no other application use it.");
                         
                     }
                 }
@@ -360,26 +356,6 @@ namespace NPOI.OpenXml4Net.OPC
                             "Can't close a package not previously open with the open() method !");
                 }
             }
-        }
-
-        /**
-         * Create a unique identifier to be use as a temp file name.
-         *
-         * @return A unique identifier use to be use as a temp file name.
-         */
-        private String GenerateTempFileName(string directory)
-        {
-            FileInfo tmpFilename = null ;
-            string path = null;
-            do
-            {
-                path = directory + Path.DirectorySeparatorChar
-            + "OpenXml4Net" + System.DateTime.Now.Ticks;
-
-                tmpFilename = new FileInfo(path);
-            } while (File.Exists(path));
-
-            return tmpFilename.Name; //FileHelper.getFilename(tmpFilename.Name);
         }
 
         /**
