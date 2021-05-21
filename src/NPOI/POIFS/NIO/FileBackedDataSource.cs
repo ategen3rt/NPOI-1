@@ -27,7 +27,7 @@ namespace NPOI.POIFS.NIO
     /// changes to the buffer end up on the disk (will fix the HPSF TestWrite
     /// currently failing unit test when done)
     /// </summary>
-    public class FileBackedDataSource : DataSource
+    public class FileBackedDataSource : DataSource, IDisposable
     {
         private MemoryStream fileStream;
         //private MemoryMappedFile mmFile;
