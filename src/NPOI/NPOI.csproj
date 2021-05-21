@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <PackageId>ategen3rt.NPOI.Core</PackageId>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.2.4</Version>
+    <Version>1.2.5</Version>
     <Authors>AdamTegen;NCC;Savorboard</Authors>
     <RepositoryUrl>https://github.com/ategen3rt/NPOI-1</RepositoryUrl>
     <Company>NCC;Savorboard</Company>

@@ -7,6 +7,7 @@
 		<Authors>AdamTegen;NCC;Savorboard</Authors>
 		<PackageProjectUrl>https://github.com/ategen3rt/NPOI-1</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ategen3rt/NPOI-1</RepositoryUrl>
+		<AssemblyVersion>1.2.5.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

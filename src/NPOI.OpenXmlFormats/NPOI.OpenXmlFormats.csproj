@@ -5,7 +5,7 @@
     <PackageId>ategen3rt.NPOI.OpenXmlFormats</PackageId>
     <AssemblyName>NPOI.OpenXmlFormats</AssemblyName>
     <Authors>AdamTegen;NCC;Savorboard</Authors>
-    <Version>1.2.4</Version>
+    <Version>1.2.5</Version>
     <RepositoryUrl>https://github.com/ategen3rt/NPOI-1</RepositoryUrl>
     <PackageProjectUrl>https://github.com/ategen3rt/NPOI-1</PackageProjectUrl>
   </PropertyGroup> 
