@@ -61,6 +61,8 @@ namespace NPOI.POIFS.FileSystem
         public override void Close()
         {
             this.stream.Close();
+            this.stream.Dispose();
+            this.stream = null;
         }
         /// <summary>
         /// Flushes this output stream and forces any buffered output bytes

@@ -1292,6 +1292,7 @@ namespace NPOI.HSSF.UserModel
                 if (directory.NFileSystem != null)
                 {
                     directory.NFileSystem.Close();
+                    directory.NFileSystem.Dispose();
                     directory = null;
                 }
             }

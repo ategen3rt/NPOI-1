@@ -296,7 +296,10 @@ namespace NPOI.POIFS.FileSystem
             {
                 // As per the constructor contract, always close the stream
                 if (channel != null)
+                {
                     channel.Close();
+                    channel.Dispose();
+                }
                 CloseInputStream(stream, success);
             }
 
@@ -312,12 +315,14 @@ namespace NPOI.POIFS.FileSystem
             try
             {
                 stream.Close();
+                stream.Dispose();
             }
             catch (IOException e)
             {
                 if (success)
                 {
-                    throw new Exception(e.Message);
+                    //throw new Exception(e.Message); //shouldn't this just be throw;
+                    throw;
                 }
 
             }

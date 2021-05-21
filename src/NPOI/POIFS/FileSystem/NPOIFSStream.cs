@@ -123,9 +123,11 @@ namespace NPOI.POIFS.FileSystem
          */
         public void UpdateContents(byte[] contents)
         {
-            Stream os = GetOutputStream();
-            os.Write(contents, 0, contents.Length);
-            os.Close();
+            using (Stream os = GetOutputStream())
+            {
+                os.Write(contents, 0, contents.Length);
+                os.Close();
+            }
         }
 
         public Stream GetOutputStream()

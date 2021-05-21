@@ -166,6 +166,7 @@ namespace NPOI.POIFS.FileSystem
             }
             try {
                 stream.Close();
+                stream.Dispose();
             } catch (IOException) {
                 if(success) {
                     throw;
