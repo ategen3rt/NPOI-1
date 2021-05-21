@@ -431,8 +431,8 @@ namespace NPOI.OpenXml4Net.OPC
                 throw new ArgumentException("path");
 
             // Get the filename from the path
-            String filename = path
-                    .Substring(path.LastIndexOf('\\') + 1);
+            
+            String filename = Path.GetFileName(path);
 
             // Create the thumbnail part name
             String contentType = ContentTypes

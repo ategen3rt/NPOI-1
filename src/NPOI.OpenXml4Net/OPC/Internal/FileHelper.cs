@@ -23,7 +23,7 @@ namespace NPOI.OpenXml4Net.OPC.Internal
          */
         public static string GetDirectory(string filepath)
         {
-            return Path.GetDirectoryName(filepath).Replace("\\","/");
+            return Path.GetDirectoryName(filepath).Replace('\\','/');
         }
 
         /**
@@ -51,7 +51,7 @@ namespace NPOI.OpenXml4Net.OPC.Internal
             while (--num2 >= 0)
             {
                 char ch1 = path[num2];
-                if (ch1 == '\\')
+                if (ch1 == Path.AltDirectorySeparatorChar || ch1 == Path.DirectorySeparatorChar)
                     return path.Substring(num2 + 1, len);
             }
             return "";

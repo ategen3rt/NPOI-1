@@ -373,7 +373,7 @@ namespace NPOI.OpenXml4Net.OPC
             string path = null;
             do
             {
-                path = directory + "\\"
+                path = directory + Path.DirectorySeparatorChar
             + "OpenXml4Net" + System.DateTime.Now.Ticks;
 
                 tmpFilename = new FileInfo(path);
