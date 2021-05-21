@@ -35,10 +35,10 @@ namespace NPOI.HSSF.Extractor
      *  by Apache Tika, but not really intended for display to the user.
      * </p>
      */
-    public class OldExcelExtractor
+    public class OldExcelExtractor : IDisposable
     {
         private RecordInputStream ris;
-        private Stream streamInput;
+        private Stream streamInput; //This isn't using dispose and doesn't implement dispose!
         private NPOIFSFileSystem fsInput;
         private int biffVersion;
         private int fileType;
@@ -63,11 +63,11 @@ namespace NPOI.HSSF.Extractor
             }
             catch (OldExcelFormatException)
             {
-                Open(new FileStream(f.FullName, FileMode.Open, FileAccess.Read));
+                Open(new FileStream(f.FullName, FileMode.Open, FileAccess.Read)); //This isn't using dispose!
             }
             catch (NotOLE2FileException)
             {
-                Open(new FileStream(f.FullName, FileMode.Open, FileAccess.Read));
+                Open(new FileStream(f.FullName, FileMode.Open, FileAccess.Read)); //This isn't using dispose!
             }
         }
         public OldExcelExtractor(NPOIFSFileSystem fs)
@@ -278,6 +278,7 @@ namespace NPOI.HSSF.Extractor
                     streamInput.Close();
                 }
                 catch (IOException) { }
+                streamInput.Dispose();
                 streamInput = null;
             }
             if (fsInput != null)
@@ -287,9 +288,55 @@ namespace NPOI.HSSF.Extractor
                     fsInput.Close();
                 }
                 catch (Exception) { }
+                fsInput.Dispose();
                 fsInput = null;
             }
         }
+
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (streamInput != null)
+                {
+                    try
+                    {
+                        streamInput.Close();
+                    }
+                    catch (IOException) { } // copied from Close()
+                    streamInput.Dispose();
+                    streamInput = null;
+                }
+
+                if (fsInput != null)
+                {
+                    try
+                    {
+                        fsInput.Close();                        
+                    }                    
+                    catch (Exception) { } //copied from Close() ???
+                    fsInput.Dispose();
+                    fsInput = null;
+                }
+            }
+        }
+
+        ~OldExcelExtractor()
+        {
+            Dispose(false);
+        }
+
+        #endregion
+
     }
 
 }

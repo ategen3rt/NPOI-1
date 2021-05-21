@@ -27,7 +27,7 @@ namespace NPOI.POIFS.NIO
     /// changes to the buffer end up on the disk (will fix the HPSF TestWrite
     /// currently failing unit test when done)
     /// </summary>
-    public class FileBackedDataSource : DataSource, IDisposable
+    public class FileBackedDataSource : DataSource
     {
         private MemoryStream fileStream;
         //private MemoryMappedFile mmFile;
@@ -62,33 +62,6 @@ namespace NPOI.POIFS.NIO
             this.writable = !readOnly;
             stream.Position = 0;
         }
-
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (null != fileStream)
-                {
-                    fileStream.Dispose();
-                    fileStream = null;
-                }
-            }
-        }
-
-        ~FileBackedDataSource()
-        {
-            Dispose(false);
-        }
-
-        #endregion
 
         public bool IsWriteable
         {
@@ -179,6 +152,8 @@ namespace NPOI.POIFS.NIO
             if (fileStream != null)
             {
                 fileStream.Close();
+                fileStream.Dispose();
+                fileStream = null;
             }
             
         }

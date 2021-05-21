@@ -15,6 +15,7 @@
    limitations under the License.
 ==================================================================== */
 
+using System;
 using System.IO;
 using NPOI.Util;
 namespace NPOI.POIFS.NIO
@@ -22,7 +23,7 @@ namespace NPOI.POIFS.NIO
     /// <summary>
     /// Common definition of how we read and write bytes
     /// </summary>
-    public abstract class DataSource
+    public abstract class DataSource: IDisposable
     {
         public abstract ByteBuffer Read(int length, long position);
 
@@ -37,5 +38,29 @@ namespace NPOI.POIFS.NIO
         /// </summary>
         /// <param name="stream"></param>
         public abstract void CopyTo(Stream stream);
+
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Close();
+            }
+        }
+
+        ~DataSource()
+        {
+            Dispose(false);
+        }
+
+        #endregion
     }
 }

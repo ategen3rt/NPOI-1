@@ -39,7 +39,7 @@ namespace NPOI.POIFS.FileSystem
      * This is the new NIO version
      */
 
-    public class NPOIFSFileSystem : BlockStore, POIFSViewable //, Closeable Leon
+    public class NPOIFSFileSystem : BlockStore, POIFSViewable, IDisposable //, Closeable Leon
     {
         private static POILogger _logger =
                 POILogFactory.GetLogger(typeof(NPOIFSFileSystem));
@@ -943,6 +943,32 @@ namespace NPOI.POIFS.FileSystem
             get { return GetViewableIterator(); }
         }
 
+        #endregion
+
+        #region IDisposable Members
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_data != null)
+                {
+                    _data.Close();
+                    _data.Dispose();
+                    _data = null;
+                }
+            }
+        }
+
+        ~NPOIFSFileSystem()
+        {
+            Dispose(false);
+        }
         #endregion
     }
 
