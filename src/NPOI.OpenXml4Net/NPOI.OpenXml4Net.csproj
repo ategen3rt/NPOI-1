@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <PackageId>DotNetCore.NPOI.OpenXml4Net</PackageId>
+    <PackageId>ategen3rt.NPOI.OpenXml4Net</PackageId>
     <Version>1.2.4</Version>
     <RepositoryUrl>https://github.com/ategen3rt/NPOI-1</RepositoryUrl>
     <PackageProjectUrl>https://github.com/ategen3rt/NPOI-1</PackageProjectUrl>
