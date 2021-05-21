@@ -2,8 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <PackageId>DotNetCore.NPOI.Core</PackageId>
+    <PackageId>ategen3rt.NPOI.Core</PackageId>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>1.2.4</Version>
+    <Authors>AdamTegen;NCC;Savorboard</Authors>
+    <RepositoryUrl>https://github.com/ategen3rt/NPOI-1</RepositoryUrl>
+    <Company>NCC;Savorboard</Company>
+    <PackageProjectUrl>https://github.com/ategen3rt/NPOI-1</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
