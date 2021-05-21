@@ -166,7 +166,7 @@ namespace NPOI.POIFS.Storage
             }
             catch (IOException ex)
             {
-                throw ex;
+                throw;
             }
         }
 

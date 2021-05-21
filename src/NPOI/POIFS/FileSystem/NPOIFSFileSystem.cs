@@ -197,16 +197,16 @@ namespace NPOI.POIFS.FileSystem
                 channel.Close();
 
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 if (closeChannelOnError)
                 {
                     if (channel != null)
                         channel.Close();
                 }
-                throw e;
+                throw;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Comes from Iterators etc.
                 // TODO Decide if we can handle these better whilst
@@ -216,7 +216,7 @@ namespace NPOI.POIFS.FileSystem
                     if (channel != null)
                     channel.Close();
                 }
-                throw e;
+                throw;
             }
         }
 

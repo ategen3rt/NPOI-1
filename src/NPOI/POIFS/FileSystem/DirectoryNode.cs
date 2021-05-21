@@ -401,9 +401,9 @@ namespace NPOI.POIFS.FileSystem
                 return rval;
 
             }
-            catch (IOException ex)
+            catch (IOException)
         {
-                throw ex;
+                throw;
             }
         }
 
@@ -489,9 +489,9 @@ namespace NPOI.POIFS.FileSystem
                     return CreateDocument(new POIFSDocument(name, stream));
                 }
             }
-            catch (IOException ex)
+            catch (IOException)
             {
-                throw ex;
+                throw;
             }
         }
 

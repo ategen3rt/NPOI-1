@@ -86,7 +86,7 @@ namespace NPOI.XSSF.Streaming
             {
                 fos.Close();
                 fos.Dispose();
-                throw e;
+                throw;
             }
 
             return outputStream;
@@ -147,7 +147,7 @@ namespace NPOI.XSSF.Streaming
             {
                 fis.Close();
                 fis.Dispose();
-                throw e;
+                throw;
             }
         }
 

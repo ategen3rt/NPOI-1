@@ -90,9 +90,9 @@ namespace NPOI.POIFS.Storage
                 }
 
             }
-            catch(IOException ex)
+            catch(IOException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -107,9 +107,9 @@ namespace NPOI.POIFS.Storage
             {
                 PrivateHeaderBlock(buffer);
             }
-            catch (IOException ex)
+            catch (IOException)
             {
-                throw ex;
+                throw;
             }
         }
         public void PrivateHeaderBlock(byte[] data)
@@ -425,9 +425,9 @@ namespace NPOI.POIFS.Storage
                     stream.WriteByte(0);
                 }
             }
-            catch (IOException ex)
+            catch (IOException)
             {
-                throw ex;
+                throw;
             }
         }
     }

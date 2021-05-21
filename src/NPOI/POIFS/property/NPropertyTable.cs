@@ -130,9 +130,9 @@ namespace NPOI.POIFS.Properties
                     StartBlock = stream.GetStartBlock();
                 }
             }
-            catch (System.IO.IOException ex)
+            catch (System.IO.IOException)
             {
-                throw ex;
+                throw;
             }
         }
     }

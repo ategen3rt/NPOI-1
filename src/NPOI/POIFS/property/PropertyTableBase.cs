@@ -100,9 +100,9 @@ namespace NPOI.POIFS.Properties
                 }
 
             }
-            catch (IOException ex)
+            catch (IOException)
             {
-                throw ex;
+                throw;
             }
         }
 
